@@ -5,7 +5,7 @@ interface homeProps {
 
 function Home(props: homeProps) {
     return (
-        <div>
+        <div className="page">
             <h2>{props.titulo}</h2>
             <p>{props.texto}</p>
         </div>
