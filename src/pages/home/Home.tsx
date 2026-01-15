@@ -1,9 +1,4 @@
-interface homeProps {
-    titulo: string;
-    texto: string;
-}
-
-function Home(props: homeProps) {
+function Home() {
     return (
         <div className="max-w-3xl mx-auto text-center py-20 space-y-10">
             <h2 className="text-5xl font-bold tracking-tight">Seja bem-vindo!</h2>
