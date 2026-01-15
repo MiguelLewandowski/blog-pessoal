@@ -1,14 +1,18 @@
-import './App.css'
-import Login from './pages/login/Login'
-import Register from './pages/login/Register'
+import Home from './pages/home/Home'
+import Footer from './components/footer/Footer'
+import Navbar from './components/navbar/Navbar'
 
 function App() {
 
   return (
-    <div className="app-container">
-      <Login />
-      <Register />
-    </div>
+      <>
+          <Navbar />
+          <Home 
+            titulo="Componente Home"
+            texto="Bem-vindo ao Blog Pessoal!"
+          />
+          <Footer />
+      </>
   )
 }
 
