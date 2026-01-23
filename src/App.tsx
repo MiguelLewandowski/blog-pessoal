@@ -24,6 +24,7 @@ function App() {
 							<Route path="/cadastrartema" element={<FormTema />} />
 							<Route path="/editartema/:id" element={<FormTema />} />
 							<Route path="/deletartema/:id" element={<DeletarTema />} />
+							<Route path="/postagens" element={<ListaPostagens />} />
 						</Routes>
 					</div>
 					<Footer />
