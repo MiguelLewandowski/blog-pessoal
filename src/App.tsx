@@ -8,6 +8,7 @@ import { AuthProvider } from './contexts/AuthContext'
 import Cadastro from './pages/cadastro/Cadastro'
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
+import ListaPostagens from './components/postagem/listaPostagem/ListaPostagem'
 
 function App() {
 	return (
