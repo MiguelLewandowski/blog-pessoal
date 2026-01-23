@@ -1,9 +1,9 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
-import { toast } from 'react-toastify';
 import type Usuario from "../../models/Usuario";
 import { cadastrarUsuario } from "../../services/Service";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function Cadastro() {
 
@@ -52,24 +52,18 @@ function Cadastro() {
 
       try{
         await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuario)
-        toast.success('Usuário cadastrado com sucesso!')
+        ToastAlerta('Usuário cadastrado com sucesso!', 'sucesso')
       }catch(error){
-        toast.error('Erro ao cadastrar o usuário!')
+        ToastAlerta('Erro ao cadastrar o usuário!', 'erro')
       }
     }else{
-      toast.warn('Dados do usuário inconsistentes! Verifique as informações do cadastro.')
+      ToastAlerta('Dados do usuário inconsistentes! Verifique as informações do cadastro.', 'erro')
       setUsuario({...usuario, senha: ''})
       setConfirmarSenha('')
     }
 
     setIsLoading(false)
   }
-
-  // Regex para validar email simples
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const isEmailValid = emailRegex.test(usuario.usuario) || usuario.usuario === '';
-  const isSenhaValid = usuario.senha.length >= 8 || usuario.senha === '';
-  const isConfirmarSenhaValid = confirmarSenha === usuario.senha || confirmarSenha === '';
 
   return (
     <>
@@ -101,14 +95,11 @@ function Cadastro() {
               type="text"
               id="usuario"
               name="usuario"
-              placeholder="Usuario (deve ser um email)"
-              className={`border-2 rounded p-2 ${!isEmailValid && usuario.usuario.length > 0 ? 'border-red-500' : 'border-slate-700'}`}
+              placeholder="Usuario"
+              className="border-2 border-slate-700 rounded p-2"
               value = {usuario.usuario}
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             />
-            {!isEmailValid && usuario.usuario.length > 0 && (
-                <span className="text-red-500 text-sm">O usuário deve ser um email válido.</span>
-            )}
           </div>
           <div className="flex flex-col w-full">
             <label htmlFor="foto">Foto</label>
@@ -129,13 +120,10 @@ function Cadastro() {
               id="senha"
               name="senha"
               placeholder="Senha"
-              className={`border-2 rounded p-2 ${!isSenhaValid && usuario.senha.length > 0 ? 'border-red-500' : 'border-slate-700'}`}
+              className="border-2 border-slate-700 rounded p-2"
               value = {usuario.senha}
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             />
-            {!isSenhaValid && usuario.senha.length > 0 && (
-                <span className="text-red-500 text-sm">A senha deve ter no mínimo 8 caracteres.</span>
-            )}
           </div>
           <div className="flex flex-col w-full">
             <label htmlFor="confirmarSenha">Confirmar Senha</label>
@@ -144,13 +132,10 @@ function Cadastro() {
               id="confirmarSenha"
               name="confirmarSenha"
               placeholder="Confirmar Senha"
-              className={`border-2 rounded p-2 ${!isConfirmarSenhaValid && confirmarSenha.length > 0 ? 'border-red-500' : 'border-slate-700'}`}
+              className="border-2 border-slate-700 rounded p-2"
               value={confirmarSenha}
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleConfirmarSenha(e)}
             />
-            {!isConfirmarSenhaValid && confirmarSenha.length > 0 && (
-                <span className="text-red-500 text-sm">As senhas devem ser iguais.</span>
-            )}
           </div>
           <div className="flex justify-around w-full gap-8">
             <button 
